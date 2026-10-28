@@ -361,7 +361,7 @@ const ui = {
   },
   en: {
     nav: { about: 'About', experience: 'Experience', projects: 'Projects', roadmap: 'Roadmap', contact: 'Contact' },
-    greeting: "Hi, I'm",
+    greeting: "Hello, I'm",
     seeProjects: 'View projects',
     contactBtn: 'Contact',
     downloadCv: 'Download CV',
