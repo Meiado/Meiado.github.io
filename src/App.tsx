@@ -116,7 +116,8 @@ function ProjectList({ items }: { items: Project[] }) {
   )
 }
 
-const cvHref = `${import.meta.env.BASE_URL}cv-gabriel-meiado.pdf`
+const cvHref = `${import.meta.env.BASE_URL}cv-gabriel-meiado-pt.pdf`
+const cvEnHref = `${import.meta.env.BASE_URL}cv-gabriel-meiado-en.pdf`
 
 const iconBtn = 'rounded-full p-2 text-[var(--muted)] transition hover:text-[var(--accent)]'
 
@@ -175,6 +176,7 @@ export default function App() {
               <a href="#projetos" className="rounded-full bg-[var(--accent)] px-5 py-2 font-medium text-[#052e16] transition hover:opacity-80">Ver projetos</a>
               <a href="#contato" className="rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]">Contato</a>
               <a href={cvHref} download className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"><Download size={14} />Baixar CV</a>
+              <a href={cvEnHref} download className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"><Download size={14} />Resume (EN)</a>
             </div>
           </motion.div>
           {photo && (
