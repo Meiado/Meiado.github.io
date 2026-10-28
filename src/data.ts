@@ -73,10 +73,10 @@ export const workProjects: Project[] = [
       'Fluxos de abertura, reabertura e fechamento escolhidos pelo estado de cada módulo e pela etapa do teste, respeitando a ordem de abertura entre módulos relacionados.',
       'Combina chamadas síncronas com verificações assíncronas paralelas e polling (CompletableFuture).',
       'Arquitetura em camadas (domínio, aplicação, infraestrutura), com mocks por perfil para desenvolvimento local.',
-      'Adaptado depois para uma POC de cliente fora do SaaS e migrado para virtual threads do Java 21.',
+      'Adaptado depois para uma POC de cliente fora do SaaS e migrado para virtual threads.',
       'Resultado: não é mais preciso acessar o SINACOR e abrir os módulos um a um, pois os fluxos rodam por chamadas de API.',
     ],
-    tags: ['Java 21', 'Spring Boot 3.5', 'REST', 'Oracle JDBC'],
+    tags: ['Java', 'Spring Boot', 'REST', 'Oracle JDBC'],
   },
   {
     title: 'Internal SRE Report Builder',
@@ -86,11 +86,11 @@ export const workProjects: Project[] = [
       'Ferramenta interna que produz os relatórios operacionais de um cliente do mercado de energia, antes montados à mão em PowerPoint.',
     points: [
       'Front-end em Next.js e React que reproduz fielmente o layout original, preenchido automaticamente com dados do Grafana. A única área editável são as observações.',
-      'API Spring Boot (Java 21) que consolida métricas de datasources do Grafana (New Relic via NRQL e AWS Athena via SQL) em relatórios intradiários, semanais e mensais, com persistência H2, cache e rate limiting.',
+      'API Spring Boot que consolida métricas de datasources do Grafana (New Relic via NRQL e AWS Athena via SQL) em relatórios intradiários, semanais e mensais, com persistência H2, cache e rate limiting.',
       'Pipelines de CI/CD com GitHub Actions, depois migradas pelo time para o Bitbucket, e exportação do relatório final em PDF.',
       'Resultado: todos os dados do relatório vêm de uma única requisição à API do Grafana, no lugar da coleta manual e da montagem em PowerPoint.',
     ],
-    tags: ['Java 21', 'Spring Boot', 'Next.js', 'React', 'TypeScript', 'Recharts', 'Grafana', 'New Relic', 'AWS Athena', 'GitHub Actions'],
+    tags: ['Java', 'Spring Boot', 'Next.js', 'React', 'TypeScript', 'Recharts', 'Grafana', 'New Relic', 'AWS Athena', 'GitHub Actions'],
   },
   {
     title: 'Custom Grafana Panel Plugin',
