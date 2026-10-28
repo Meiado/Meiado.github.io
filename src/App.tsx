@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Download, Mail, Moon, Sun } from 'lucide-react'
+import { ArrowUpRight, Mail, Moon, Sun } from 'lucide-react'
+import { CvMenu } from './CvMenu'
 import { SkillBadges } from './skills'
 import { education, experience, personalProjects, profile, roadmap, workProjects, type Project } from './data'
 
@@ -116,9 +117,6 @@ function ProjectList({ items }: { items: Project[] }) {
   )
 }
 
-const cvHref = `${import.meta.env.BASE_URL}cv-gabriel-meiado-pt.pdf`
-const cvEnHref = `${import.meta.env.BASE_URL}cv-gabriel-meiado-en.pdf`
-
 const iconBtn = 'rounded-full p-2 text-[var(--muted)] transition hover:text-[var(--accent)]'
 
 export default function App() {
@@ -153,7 +151,7 @@ export default function App() {
             <a href="#projetos" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">Projetos</a>
             <a href="#roadmap" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">Roadmap</a>
             <a href="#contato" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">Contato</a>
-            <a href={cvHref} download className="ml-1 hidden items-center gap-1.5 rounded-full border border-[var(--line)] px-3 py-1.5 text-xs transition hover:border-[var(--accent)] hover:text-[var(--accent)] sm:flex"><Download size={13} />CV</a>
+            <div className="ml-1 hidden sm:block"><CvMenu label="CV" className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-3 py-1.5 text-xs transition hover:border-[var(--accent)] hover:text-[var(--accent)]" /></div>
             <a href={profile.links.github} target="_blank" rel="noreferrer" aria-label="GitHub" className={iconBtn}><GithubIcon /></a>
             <a href={profile.links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className={iconBtn}><LinkedinIcon /></a>
             <button onClick={() => setDark(!dark)} aria-label="Alternar tema" className={iconBtn}>
@@ -175,8 +173,7 @@ export default function App() {
             <div className="mt-6 flex gap-3 text-sm">
               <a href="#projetos" className="rounded-full bg-[var(--accent)] px-5 py-2 font-medium text-[#052e16] transition hover:opacity-80">Ver projetos</a>
               <a href="#contato" className="rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]">Contato</a>
-              <a href={cvHref} download className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"><Download size={14} />Baixar CV</a>
-              <a href={cvEnHref} download className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"><Download size={14} />Resume (EN)</a>
+              <CvMenu label="Baixar CV" className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]" />
             </div>
           </motion.div>
           {photo && (
