@@ -200,10 +200,10 @@ export default function App() {
               <RoleTypewriter key={t.roles[1]} words={t.roles} />
             </p>
             <p className="mt-5 max-w-md leading-relaxed text-[var(--muted)]">{t.tagline}</p>
-            <div className="mt-6 flex flex-wrap gap-3 text-sm [&_a]:whitespace-nowrap [&_button]:whitespace-nowrap">
-              <a href="#projects" className="rounded-full bg-[var(--accent)] px-5 py-2 font-medium text-[#052e16] transition hover:opacity-80">{t.ui.seeProjects}</a>
-              <a href="#contact" className="rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]">{t.ui.contactBtn}</a>
-              <CvMenu label={t.ui.downloadCv} className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]" />
+            <div className="mt-6 flex flex-wrap gap-2 text-sm [&_a]:whitespace-nowrap [&_button]:whitespace-nowrap">
+              <a href="#projects" className="rounded-full bg-[var(--accent)] px-4 py-2 font-medium text-[#052e16] transition hover:opacity-80">{t.ui.seeProjects}</a>
+              <a href="#contact" className="rounded-full border border-[var(--line)] px-4 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]">{t.ui.contactBtn}</a>
+              <CvMenu label={t.ui.downloadCv} className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-4 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]" />
             </div>
           </motion.div>
           {photo && (
@@ -211,7 +211,7 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="h-40 w-40 shrink-0 overflow-hidden rounded-full border-2 border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_22%,var(--bg))] sm:h-48 sm:w-48"
+              className="h-40 w-40 shrink-0 overflow-hidden rounded-full border-2 border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_22%,var(--bg))] sm:h-44 sm:w-44"
             >
               <img
                 src={photo}
