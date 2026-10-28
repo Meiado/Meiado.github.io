@@ -3,7 +3,7 @@ import oracleLogo from 'devicon/icons/oracle/oracle-original.svg'
 import {
   siBun, siDocker, siGit, siKubernetes, siMongodb, siMysql, 
   siNextdotjs, siNodedotjs, siPostgresql, siReact, siSpringboot,
-  siSwagger, siTypescript, siVuedotjs, type SimpleIcon,
+  siSwagger, siVuedotjs, type SimpleIcon,
 } from 'simple-icons'
 
 type Skill =
@@ -16,7 +16,6 @@ const skills: Skill[] = [
   { name: 'Swagger', icon: siSwagger },
   { name: 'Node.js', icon: siNodedotjs },
   { name: 'Bun', icon: siBun },
-  { name: 'TypeScript', icon: siTypescript },
   { name: 'React', icon: siReact },
   { name: 'Next.js', icon: siNextdotjs },
   { name: 'Vue.js', icon: siVuedotjs },
