@@ -1,18 +1,4 @@
-export const profile = {
-  name: 'Gabriel Meiado',
-  roles: ['Full Stack Developer', 'Java & Spring Boot', 'Sustentação de sistemas Java', 'Soluções com IA', 'TypeScript & Next.js'],
-  tagline:
-    'Desenvolvo e sustento sistemas em Java e Spring Boot, construo interfaces com TypeScript e Next.js e crio soluções com IA para automação de testes web, com foco em qualidade e performance.',
-  about: [
-    'Desenvolvedor na Vericode e bacharel em Sistemas de Informação pela Unoeste. Atuo no desenvolvimento e na sustentação de projetos Java e Spring Boot, de APIs e orquestradores a ferramentas internas, e também construo interfaces com Next.js e TypeScript.',
-    'No dia a dia também trabalho com Kubernetes: nosso ambiente e as alterações nele são aplicados via kubectl. Meu trabalho inclui soluções com IA, como a automação de cenários web com Playwright MCP no Jetdata, plataforma de testes de capacidade e certificação desenvolvida em parceria com a B3. Tenho ainda uma base em testes funcionais e não funcionais, que reflete na qualidade e na escalabilidade do que entrego. Fora do código, gosto de games, leitura e streams.',
-  ],
-  links: {
-    github: 'https://github.com/Meiado',
-    linkedin: 'https://www.linkedin.com/in/meiado',
-    email: 'mailto:gabrielmeiado20@gmail.com',
-  },
-}
+export type Lang = 'pt' | 'en'
 
 export type Project = {
   title: string
@@ -24,158 +10,418 @@ export type Project = {
   href?: string
 }
 
-export const workProjects: Project[] = [
+export type Job = {
+  role: string
+  company: string
+  period: string
+  summary: string
+  points: string[]
+  skills: string[]
+}
+
+export const name = 'Gabriel Meiado'
+
+export const links = {
+  github: 'https://github.com/Meiado',
+  linkedin: 'https://www.linkedin.com/in/meiado',
+  email: 'mailto:gabrielmeiado20@gmail.com',
+}
+
+type Texts<T> = { pt: T; en: T }
+
+const work: { tags: string[]; href?: string; text: Texts<Omit<Project, 'tags' | 'href'>> }[] = [
   {
-    title: 'Jetdata Automation IA',
-    period: 'fev 2026 — atual',
-    contribution:
-      'Persistência e orquestração de cenários Playwright entre os serviços do Jetdata, decomposição do monólito de automação herdado em um componente baseado em MCP, host de sessões remotas de navegador e a interface Builder.',
-    description:
-      'Plataforma de automação inteligente de cenários de teste para certificação de sistemas de pós-negociação conectados à B3, focada no SINACOR (web e desktop legado). Combina arquitetura MCP e IA generativa: o usuário descreve o cenário em linguagem natural e a IA interpreta, gera o script e executa de ponta a ponta.',
-    points: [
-      'Cinco formas de criar cenários, todas alimentando o mesmo fluxo de persistência e execução: importar scripts Playwright, descrever em linguagem natural, importar planilhas, inserir manualmente ou construir de forma guiada por chat com visão ao vivo do navegador.',
-      'Reduz o tempo e o conhecimento de programação necessários, para perfis técnicos e não técnicos.',
-    ],
     tags: ['Java', 'Spring Boot', 'Next.js', 'TypeScript', 'Playwright', 'MCP', 'MySQL', 'MongoDB'],
+    text: {
+      pt: {
+        title: 'Jetdata Automation IA',
+        period: 'fev 2026 — atual',
+        contribution:
+          'Persistência e orquestração de cenários Playwright entre os serviços do Jetdata, decomposição do monólito de automação herdado em um componente baseado em MCP, host de sessões remotas de navegador e a interface Builder.',
+        description:
+          'Plataforma de automação inteligente de cenários de teste para certificação de sistemas de pós-negociação conectados à B3, focada no SINACOR (web e desktop legado). Combina arquitetura MCP e IA generativa: o usuário descreve o cenário em linguagem natural e a IA interpreta, gera o script e executa de ponta a ponta.',
+        points: [
+          'Cinco formas de criar cenários, todas alimentando o mesmo fluxo de persistência e execução: importar scripts Playwright, descrever em linguagem natural, importar planilhas, inserir manualmente ou construir de forma guiada por chat com visão ao vivo do navegador.',
+          'Reduz o tempo e o conhecimento de programação necessários, para perfis técnicos e não técnicos.',
+        ],
+      },
+      en: {
+        title: 'Jetdata Automation IA',
+        period: 'Feb 2026 — present',
+        contribution:
+          "Persistence and orchestration of Playwright scenarios across Jetdata's services, decomposition of the inherited automation monolith into an MCP-based component, a remote browser session host, and the Builder interface.",
+        description:
+          'An intelligent test-scenario automation platform for certifying post-trade systems connected to B3, focused on SINACOR (web and legacy desktop). It combines MCP architecture with generative AI: users describe a scenario in natural language, and the AI interprets it, generates the script, and runs it end-to-end.',
+        points: [
+          'Five ways to create scenarios, all feeding the same persistence and execution flow: import Playwright scripts, describe in natural language, import spreadsheets, insert manually, or build with guided chat and a live browser view.',
+          'Reduces the time and programming expertise needed, for technical and non-technical profiles alike.',
+        ],
+      },
+    },
   },
   {
-    title: 'Jetdata 2.0 — SaaS B3 | CVM 35',
-    period: 'abr 2025 — atual',
-    contribution: 'Orquestrador de módulos SINACOR e relatório final de execução automatizado.',
-    description:
-      'Evolução do Jetdata para um SaaS completo que automatiza a certificação de desempenho exigida pela Resolução CVM 35, para instituições conectadas à B3. Elimina o fluxo manual de geração de dados de teste, coleta de métricas, validação de ambiente e produção de relatórios.',
-    points: [
-      'Relatório final automatizado: antes montado à mão em Word, agora gerado por scripts que descrevem a infraestrutura OCI e renderizam as evidências como imagens, montam gráficos do histórico, capturam a execução no Grafana, preenchem o template e avaliam cada indicador como aprovado ou reprovado.',
-      'Resultado: relatório gerado em cerca de 1 minuto, em vez de 1 a 3 semanas de trabalho manual.',
-    ],
     tags: ['Java', 'Spring Boot', 'Apache POI', 'JFreeChart', 'Grafana API', 'Prometheus', 'Oracle Cloud'],
+    text: {
+      pt: {
+        title: 'Jetdata 2.0 — SaaS B3 | CVM 35',
+        period: 'abr 2025 — atual',
+        contribution: 'Orquestrador de módulos SINACOR e relatório final de execução automatizado.',
+        description:
+          'Evolução do Jetdata para um SaaS completo que automatiza a certificação de desempenho exigida pela Resolução CVM 35, para instituições conectadas à B3. Elimina o fluxo manual de geração de dados de teste, coleta de métricas, validação de ambiente e produção de relatórios.',
+        points: [
+          'Relatório final automatizado: antes montado à mão em Word, agora gerado por scripts que descrevem a infraestrutura OCI e renderizam as evidências como imagens, montam gráficos do histórico, capturam a execução no Grafana, preenchem o template e avaliam cada indicador como aprovado ou reprovado.',
+          'Resultado: relatório gerado em cerca de 1 minuto, em vez de 1 a 3 semanas de trabalho manual.',
+        ],
+      },
+      en: {
+        title: 'Jetdata 2.0 — SaaS B3 | CVM 35',
+        period: 'Apr 2025 — present',
+        contribution: 'SINACOR modules orchestrator and automated final execution report.',
+        description:
+          'Evolution of Jetdata into a full SaaS that automates the performance certification required by CVM Resolution 35, for institutions connected to B3. It removes the manual workflow for test-data generation, metrics collection, environment validation, and report production.',
+        points: [
+          'Automated final report: previously assembled by hand in Word, now generated by scripts that describe the OCI infrastructure and render the evidence as images, build charts from historical data, capture the execution from Grafana, fill the template, and evaluate each indicator as passed or failed.',
+          'Result: report generated in about 1 minute instead of 1 to 3 weeks of manual work.',
+        ],
+      },
+    },
   },
   {
-    title: 'Browser Session Host',
-    period: 'set 2026 — atual',
-    description:
-      'Serviço de infraestrutura que controla um Chromium remoto por sessão. Começou como uma tentativa de criar uma versão web do Playwright codegen e virou o host de sessões do Jetdata Automation IA, para que o usuário acompanhe a sessão ao vivo e construa cenários com orientação.',
-    points: [
-      'Cada sessão abre uma página Chromium headless e transmite a tela em tempo real para um canvas, repassando mouse, teclado e scroll por WebSocket.',
-      'Expõe o mesmo navegador a clientes externos via Playwright MCP (Streamable HTTP), com um processo MCP por sessão conectado por CDP.',
-      'Incorporável por iframe, protegido por tokens JWT de curta duração vinculados a cada sessão.',
-      'Encerra sessões de forma explícita, ao fechar a página ou por inatividade sem espectadores.',
-      'Fronteira clara: o serviço só hospeda o navegador, e o motor de automação decide quais ações executar e quais cenários persistir.',
-    ],
     tags: ['Node.js', 'TypeScript', 'Next.js', 'Chromium (CDP)', 'Playwright MCP', 'WebSocket', 'JWT'],
+    text: {
+      pt: {
+        title: 'Browser Session Host',
+        period: 'set 2026 — atual',
+        description:
+          'Serviço de infraestrutura que controla um Chromium remoto por sessão. Começou como uma tentativa de criar uma versão web do Playwright codegen e virou o host de sessões do Jetdata Automation IA, para que o usuário acompanhe a sessão ao vivo e construa cenários com orientação.',
+        points: [
+          'Cada sessão abre uma página Chromium headless e transmite a tela em tempo real para um canvas, repassando mouse, teclado e scroll por WebSocket.',
+          'Expõe o mesmo navegador a clientes externos via Playwright MCP (Streamable HTTP), com um processo MCP por sessão conectado por CDP.',
+          'Incorporável por iframe, protegido por tokens JWT de curta duração vinculados a cada sessão.',
+          'Encerra sessões de forma explícita, ao fechar a página ou por inatividade sem espectadores.',
+          'Fronteira clara: o serviço só hospeda o navegador, e o motor de automação decide quais ações executar e quais cenários persistir.',
+        ],
+      },
+      en: {
+        title: 'Browser Session Host',
+        period: 'Sep 2026 — present',
+        description:
+          'An infrastructure service that controls a remote Chromium browser per session. It began as an attempt to build a web version of Playwright codegen and evolved into the browser session host used by Jetdata Automation IA, so users can watch the open session live and build scenarios with guidance.',
+        points: [
+          'Each session opens a headless Chromium page and streams its screen in real time to a canvas, forwarding mouse, keyboard, and scroll input back through WebSocket.',
+          'Exposes the same browser to external clients through Playwright MCP (Streamable HTTP), with one MCP process per session connected over CDP.',
+          'Embeddable through an iframe, protected by short-lived JWT tokens bound to each session.',
+          'Closes sessions explicitly, when the page is closed, or when they sit idle with no viewers connected.',
+          'Keeps a clear boundary: the service only hosts the browser, while the automation engine decides which actions to run and which scenarios to persist.',
+        ],
+      },
+    },
   },
   {
-    title: 'SINACOR Module Orchestrator',
-    period: 'jul 2025 — atual',
-    description:
-      'Serviço que orquestra os módulos do SINACOR necessários aos testes de capacidade do Jetdata 2.0, substituindo o processo manual de abrir e fechar módulos.',
-    points: [
-      'Fluxos de abertura, reabertura e fechamento escolhidos pelo estado de cada módulo e pela etapa do teste, respeitando a ordem de abertura entre módulos relacionados.',
-      'Combina chamadas síncronas com verificações assíncronas paralelas e polling (CompletableFuture).',
-      'Arquitetura em camadas (domínio, aplicação, infraestrutura), com mocks por perfil para desenvolvimento local.',
-      'Adaptado depois para uma POC de cliente fora do SaaS e migrado para virtual threads.',
-      'Resultado: não é mais preciso acessar o SINACOR e abrir os módulos um a um, pois os fluxos rodam por chamadas de API.',
-    ],
     tags: ['Java', 'Spring Boot', 'REST', 'Oracle JDBC'],
+    text: {
+      pt: {
+        title: 'SINACOR Module Orchestrator',
+        period: 'jul 2025 — atual',
+        description:
+          'Serviço que orquestra os módulos do SINACOR necessários aos testes de capacidade do Jetdata 2.0, substituindo o processo manual de abrir e fechar módulos.',
+        points: [
+          'Fluxos de abertura, reabertura e fechamento escolhidos pelo estado de cada módulo e pela etapa do teste, respeitando a ordem de abertura entre módulos relacionados.',
+          'Combina chamadas síncronas com verificações assíncronas paralelas e polling (CompletableFuture).',
+          'Arquitetura em camadas (domínio, aplicação, infraestrutura), com mocks por perfil para desenvolvimento local.',
+          'Adaptado depois para uma POC de cliente fora do SaaS e migrado para virtual threads.',
+          'Resultado: não é mais preciso acessar o SINACOR e abrir os módulos um a um, pois os fluxos rodam por chamadas de API.',
+        ],
+      },
+      en: {
+        title: 'SINACOR Module Orchestrator',
+        period: 'Jul 2025 — present',
+        description:
+          'An orchestration service for the SINACOR modules required to run capacity tests within Jetdata 2.0, replacing a manual process of opening and closing modules.',
+        points: [
+          "Opening, reopening, and closing flows chosen from each module's state and the test stage, respecting the opening order between related modules.",
+          'Combines synchronous calls with parallel asynchronous status checks and polling (CompletableFuture).',
+          'Layered architecture (domain, application, infrastructure) with profile-based mocks for local development.',
+          'Later adapted to run in a client POC outside the SaaS and migrated to virtual threads.',
+          'Result: no need to access SINACOR and open the modules one by one, since the flows run through API calls.',
+        ],
+      },
+    },
   },
   {
-    title: 'Internal SRE Report Builder',
-    period: 'fev 2026 — mai 2026',
-    contribution: 'Desenvolvi a ferramenta de ponta a ponta e hoje presto suporte a quem a mantém.',
-    description:
-      'Ferramenta interna que produz os relatórios operacionais de um cliente do mercado de energia, antes montados à mão em PowerPoint.',
-    points: [
-      'Front-end em Next.js e React que reproduz fielmente o layout original, preenchido automaticamente com dados do Grafana. A única área editável são as observações.',
-      'API Spring Boot que consolida métricas de datasources do Grafana (New Relic via NRQL e AWS Athena via SQL) em relatórios intradiários, semanais e mensais, com persistência H2, cache e rate limiting.',
-      'Pipelines de CI/CD com GitHub Actions, depois migradas pelo time para o Bitbucket, e exportação do relatório final em PDF.',
-      'Resultado: todos os dados do relatório vêm de uma única requisição à API do Grafana, no lugar da coleta manual e da montagem em PowerPoint.',
-    ],
     tags: ['Java', 'Spring Boot', 'Next.js', 'React', 'TypeScript', 'Recharts', 'Grafana', 'New Relic', 'AWS Athena', 'GitHub Actions'],
+    text: {
+      pt: {
+        title: 'Internal SRE Report Builder',
+        period: 'fev 2026 — mai 2026',
+        contribution: 'Desenvolvi a ferramenta de ponta a ponta e hoje presto suporte a quem a mantém.',
+        description:
+          'Ferramenta interna que produz os relatórios operacionais de um cliente do mercado de energia, antes montados à mão em PowerPoint.',
+        points: [
+          'Front-end em Next.js e React que reproduz fielmente o layout original, preenchido automaticamente com dados do Grafana. A única área editável são as observações.',
+          'API Spring Boot que consolida métricas de datasources do Grafana (New Relic via NRQL e AWS Athena via SQL) em relatórios intradiários, semanais e mensais, com persistência H2, cache e rate limiting.',
+          'Pipelines de CI/CD com GitHub Actions, depois migradas pelo time para o Bitbucket, e exportação do relatório final em PDF.',
+          'Resultado: todos os dados do relatório vêm de uma única requisição à API do Grafana, no lugar da coleta manual e da montagem em PowerPoint.',
+        ],
+      },
+      en: {
+        title: 'Internal SRE Report Builder',
+        period: 'Feb 2026 — May 2026',
+        contribution: 'I built the tool end to end and still support the people who maintain it today.',
+        description:
+          'An internal tool that produces the operational reports of a client in the energy trading market, previously assembled by hand in PowerPoint.',
+        points: [
+          'Next.js and React front end that faithfully reproduces the original layout, filled automatically with Grafana data. The only editable area is the notes section.',
+          'Spring Boot API that consolidates metrics from Grafana datasources (New Relic via NRQL and AWS Athena via SQL) into intraday, weekly, and monthly reports, with H2 persistence, caching, and rate limiting.',
+          'CI/CD pipelines with GitHub Actions, later migrated by the team to Bitbucket, and PDF export of the final report.',
+          'Result: all report data comes from a single Grafana API request, replacing manual collection and PowerPoint assembly.',
+        ],
+      },
+    },
   },
   {
-    title: 'Custom Grafana Panel Plugin',
-    period: 'nov 2025 — dez 2025',
-    description:
-      'Plugin de painel para o Grafana com gráficos bidimensionais de eixos intercambiáveis, criado para um cliente de observabilidade e SRE que precisava ver várias séries Y contra um único X na vertical, algo que o painel nativo não suporta. Publicado como open source.',
     tags: ['Grafana plugin SDK', 'TypeScript', 'React'],
     href: 'https://github.com/vericode-io/vericode-custom-xychart',
+    text: {
+      pt: {
+        title: 'Custom Grafana Panel Plugin',
+        period: 'nov 2025 — dez 2025',
+        description:
+          'Plugin de painel para o Grafana com gráficos bidimensionais de eixos intercambiáveis, criado para um cliente de observabilidade e SRE que precisava ver várias séries Y contra um único X na vertical, algo que o painel nativo não suporta. Publicado como open source.',
+      },
+      en: {
+        title: 'Custom Grafana Panel Plugin',
+        period: 'Nov 2025 — Dec 2025',
+        description:
+          'A custom Grafana panel plugin for two-dimensional charts with swappable axes, built for an observability and SRE client who needed to view multiple Y series against a single X in a vertical layout, which the native panel does not support. Published as open source.',
+      },
+    },
   },
 ]
 
-export const personalProjects: Project[] = [
+const personal: typeof work = [
   {
-    title: 'Projeto ATOP API',
-    period: 'faculdade',
-    description:
-      'API RESTful em Spring Boot desenvolvida em equipe durante a faculdade, com perfis de cidadão e administrador. Containerizada com Docker e publicada no Google Cloud Run.',
     tags: ['Java', 'Spring Boot', 'MongoDB', 'Docker', 'Google Cloud Run'],
     href: 'https://github.com/HumbertoStuani/projetoatop-api',
+    text: {
+      pt: {
+        title: 'Projeto ATOP API',
+        period: 'faculdade',
+        description:
+          'API RESTful em Spring Boot desenvolvida em equipe durante a faculdade, com perfis de cidadão e administrador. Containerizada com Docker e publicada no Google Cloud Run.',
+      },
+      en: {
+        title: 'ATOP API Project',
+        period: 'university',
+        description:
+          'A RESTful API in Spring Boot built by a team during university, with citizen and admin profiles. Containerized with Docker and deployed to Google Cloud Run.',
+      },
+    },
   },
   {
-    title: 'TaskFlow',
-    period: 'faculdade',
-    description: 'Gerenciador de tarefas full stack com frontend em Vue.js e backend próprio.',
     tags: ['Vue.js', 'TypeScript', 'REST'],
     href: 'https://github.com/Meiado/taskflow',
+    text: {
+      pt: {
+        title: 'TaskFlow',
+        period: 'faculdade',
+        description: 'Gerenciador de tarefas full stack com frontend em Vue.js e backend próprio.',
+      },
+      en: {
+        title: 'TaskFlow',
+        period: 'university',
+        description: 'A full stack task manager with a Vue.js front end and its own back end.',
+      },
+    },
   },
 ]
 
-export const experience = [
+const jobs: { company: string; skills: string[]; text: Texts<Omit<Job, 'company' | 'skills'>> }[] = [
   {
-    role: 'IT Trainee',
     company: 'Vericode',
-    period: 'jan 2026 — atual',
-    summary:
-      'Jetdata, plataforma da Vericode construída com a B3 para automatizar testes de capacidade e a certificação de corretoras. Atuo no desenvolvimento e na sustentação de serviços Java e Spring Boot e em soluções com IA, principalmente a automação de cenários web com Playwright MCP.',
-    points: [
-      'Rotina com Kubernetes: todo o ambiente e suas alterações são aplicados via kubectl.',
-      'Jetdata Automation IA: persistência e orquestração de cenários, componente MCP e interface Builder.',
-      'Browser Session Host para visualização ao vivo e construção guiada de cenários.',
-      'Internal SRE Report Builder, ferramenta de relatórios de ponta a ponta.',
-    ],
     skills: ['Java', 'Spring Boot', 'Next.js', 'TypeScript', 'Playwright', 'MCP', 'Node.js', 'Kubernetes'],
+    text: {
+      pt: {
+        role: 'IT Trainee',
+        period: 'jan 2026 — atual',
+        summary:
+          'Jetdata, plataforma da Vericode construída com a B3 para automatizar testes de capacidade e a certificação de corretoras. Atuo no desenvolvimento e na sustentação de serviços Java e Spring Boot e em soluções com IA, principalmente a automação de cenários web com Playwright MCP.',
+        points: [
+          'Rotina com Kubernetes: todo o ambiente e suas alterações são aplicados via kubectl.',
+          'Jetdata Automation IA: persistência e orquestração de cenários, componente MCP e interface Builder.',
+          'Browser Session Host para visualização ao vivo e construção guiada de cenários.',
+          'Internal SRE Report Builder, ferramenta de relatórios de ponta a ponta.',
+        ],
+      },
+      en: {
+        role: 'IT Trainee',
+        period: 'Jan 2026 — present',
+        summary:
+          "Jetdata, Vericode's platform built with B3 to automate capacity testing and brokerage certification. I develop and maintain Java and Spring Boot services and work on AI solutions, mainly web scenario automation with Playwright MCP.",
+        points: [
+          'Daily work with Kubernetes: the whole environment and its changes are applied through kubectl.',
+          'Jetdata Automation IA: scenario persistence and orchestration, MCP component, and Builder interface.',
+          'Browser Session Host for live viewing and guided scenario building.',
+          'Internal SRE Report Builder, an end-to-end reporting tool.',
+        ],
+      },
+    },
   },
   {
-    role: 'IT Intern',
     company: 'Vericode',
-    period: 'fev 2025 — dez 2025',
-    summary: 'Entrei no projeto Jetdata 2.0 e fui efetivado ao fim do programa de estágio.',
-    points: [
-      'Relatório final de execução automatizado e orquestrador de módulos SINACOR.',
-      'Plugin de painel para o Grafana, publicado como open source.',
-      'Trilhas de formação em testes funcionais e não funcionais, Docker e computação em nuvem.',
-    ],
     skills: ['Java', 'Spring Boot', 'Apache POI', 'Grafana plugin SDK', 'TypeScript', 'REST', 'OCI'],
+    text: {
+      pt: {
+        role: 'IT Intern',
+        period: 'fev 2025 — dez 2025',
+        summary: 'Entrei no projeto Jetdata 2.0 e fui efetivado ao fim do programa de estágio.',
+        points: [
+          'Relatório final de execução automatizado e orquestrador de módulos SINACOR.',
+          'Plugin de painel para o Grafana, publicado como open source.',
+          'Trilhas de formação em testes funcionais e não funcionais, Docker e computação em nuvem.',
+        ],
+      },
+      en: {
+        role: 'IT Intern',
+        period: 'Feb 2025 — Dec 2025',
+        summary: 'Joined the Jetdata 2.0 project and was hired full-time at the end of the internship program.',
+        points: [
+          'Automated final execution report and SINACOR modules orchestrator.',
+          'Grafana panel plugin, published as open source.',
+          'Training tracks in functional and non-functional testing, Docker, and cloud computing.',
+        ],
+      },
+    },
   },
   {
-    role: 'Full Stack Development Intern',
     company: 'iBati',
-    period: 'set 2024 — fev 2025',
-    summary:
-      'Plataforma de gestão de sinistros que faz a mediação entre reclamantes, empresas e seguradoras. Atuei no full stack, principalmente em manutenção e suporte.',
-    points: [
-      'Conduzi minha entrega final: migração de banco que unificou registros de várias tabelas em uma só, reescrevendo as consultas SQL dependentes.',
-      'Atualizei o front end para o novo modelo de dados, com novos componentes e renovação visual.',
-      'Corrigi bugs e mantive a plataforma estável em produção.',
-    ],
     skills: ['TypeScript', 'SolidJS', 'PHP', 'MySQL', 'SQL', 'Docker'],
+    text: {
+      pt: {
+        role: 'Full Stack Development Intern',
+        period: 'set 2024 — fev 2025',
+        summary:
+          'Plataforma de gestão de sinistros que faz a mediação entre reclamantes, empresas e seguradoras. Atuei no full stack, principalmente em manutenção e suporte.',
+        points: [
+          'Conduzi minha entrega final: migração de banco que unificou registros de várias tabelas em uma só, reescrevendo as consultas SQL dependentes.',
+          'Atualizei o front end para o novo modelo de dados, com novos componentes e renovação visual.',
+          'Corrigi bugs e mantive a plataforma estável em produção.',
+        ],
+      },
+      en: {
+        role: 'Full Stack Development Intern',
+        period: 'Sep 2024 — Feb 2025',
+        summary:
+          'A claims management platform that mediates between claimants, businesses, and insurers. I worked across the full stack, mostly on maintenance and support.',
+        points: [
+          'Led my final delivery: a database migration that consolidated records from several tables into a single one, rewriting the dependent SQL queries.',
+          'Updated the front end to the new data model, with new components and a visual refresh.',
+          'Fixed bugs and kept the platform stable in production.',
+        ],
+      },
+    },
   },
 ]
 
-export const education = [
-  { title: 'Bacharelado em Sistemas de Informação', place: 'Unoeste', period: '2022 — 2025' },
-  { title: 'ICPC South America/Brazil Finals 2022', place: 'Menção Honrosa', period: '2022' },
-  { title: 'Arquitetura de Software & Design de Sistemas Modernos', place: 'Udemy', period: 'certificação' },
-  { title: 'Introduction to Kubernetes (LFS158)', place: 'Linux Foundation', period: 'certificação' },
-]
-
-export const roadmap = {
-  intro:
-    'Estou aprofundando meus estudos em arquitetura de software com Java e Spring, em busca de oportunidades em que decisões de design e qualidade técnica impactem diretamente o produto.',
-  items: [
-    { title: 'Microsserviços com Java e Spring Boot', note: 'Já aplico no dia a dia, agora estudando de forma estruturada.' },
-    { title: 'Design patterns', note: 'Padrões de projeto e quando usá-los.' },
-    { title: 'System design', note: 'Boas práticas de desenho de sistemas escaláveis.' },
-    { title: 'Arquitetura de Software & Design de Sistemas Modernos', note: 'Certificação concluída na Udemy.' },
+const education: Texts<{ title: string; place: string; period: string }[]> = {
+  pt: [
+    { title: 'Bacharelado em Sistemas de Informação', place: 'Unoeste', period: '2022 — 2025' },
+    { title: 'ICPC South America/Brazil Finals 2022', place: 'Menção Honrosa', period: '2022' },
+    { title: 'Arquitetura de Software & Design de Sistemas Modernos', place: 'Udemy', period: 'certificação' },
+    { title: 'Introduction to Kubernetes (LFS158)', place: 'Linux Foundation', period: 'certificação' },
   ],
+  en: [
+    { title: "Bachelor's degree in Information Systems", place: 'Unoeste', period: '2022 — 2025' },
+    { title: 'ICPC South America/Brazil Finals 2022', place: 'Honorable Mention', period: '2022' },
+    { title: 'Software Architecture & Modern Systems Design', place: 'Udemy', period: 'certification' },
+    { title: 'Introduction to Kubernetes (LFS158)', place: 'Linux Foundation', period: 'certification' },
+  ],
+}
+
+const toProjects = (list: typeof work, lang: Lang): Project[] =>
+  list.map((p) => ({ ...p.text[lang], tags: p.tags, href: p.href }))
+
+const toJobs = (lang: Lang): Job[] =>
+  jobs.map((j) => ({ ...j.text[lang], company: j.company, skills: j.skills }))
+
+const ui = {
+  pt: {
+    nav: { about: 'Sobre', experience: 'Experiência', projects: 'Projetos', roadmap: 'Roadmap', contact: 'Contato' },
+    greeting: 'Olá, eu sou',
+    seeProjects: 'Ver projetos',
+    contactBtn: 'Contato',
+    downloadCv: 'Baixar CV',
+    toggleTheme: 'Alternar tema',
+    toggleLang: 'Mudar idioma',
+    contribution: 'Minha contribuição: ',
+    workNote:
+      'Os projetos profissionais abaixo são código privado da empresa. Descrevo o que é público e a minha contribuição, sem mostrar código.',
+    personalTitle: 'Faculdade e pessoais',
+    contactLine: 'Aberto a conversas sobre projetos e oportunidades.',
+  },
+  en: {
+    nav: { about: 'About', experience: 'Experience', projects: 'Projects', roadmap: 'Roadmap', contact: 'Contact' },
+    greeting: "Hi, I'm",
+    seeProjects: 'View projects',
+    contactBtn: 'Contact',
+    downloadCv: 'Download CV',
+    toggleTheme: 'Toggle theme',
+    toggleLang: 'Change language',
+    contribution: 'My contribution: ',
+    workNote:
+      "The professional projects below are the company's private code. I describe what can be public and my own contribution, without showing code.",
+    personalTitle: 'University and personal',
+    contactLine: 'Open to conversations about projects and opportunities.',
+  },
+}
+
+export const content = {
+  pt: {
+    ui: ui.pt,
+    roles: ['Full Stack Developer', 'Java & Spring Boot', 'Sustentação de sistemas Java', 'Soluções com IA', 'TypeScript & Next.js'],
+    tagline:
+      'Desenvolvo e sustento sistemas em Java e Spring Boot, construo interfaces com TypeScript e Next.js e crio soluções com IA para automação de testes web, com foco em qualidade e performance.',
+    about: [
+      'Desenvolvedor na Vericode e bacharel em Sistemas de Informação pela Unoeste. Atuo no desenvolvimento e na sustentação de projetos Java e Spring Boot, de APIs e orquestradores a ferramentas internas, e também construo interfaces com Next.js e TypeScript.',
+      'No dia a dia também trabalho com Kubernetes: nosso ambiente e as alterações nele são aplicados via kubectl. Meu trabalho inclui soluções com IA, como a automação de cenários web com Playwright MCP no Jetdata, plataforma de testes de capacidade e certificação desenvolvida em parceria com a B3. Tenho ainda uma base em testes funcionais e não funcionais, que reflete na qualidade e na escalabilidade do que entrego. Fora do código, gosto de games, leitura e streams.',
+    ],
+    workProjects: toProjects(work, 'pt'),
+    personalProjects: toProjects(personal, 'pt'),
+    experience: toJobs('pt'),
+    education: education.pt,
+    roadmap: {
+      intro:
+        'Estou aprofundando meus estudos em arquitetura de software com Java e Spring, em busca de oportunidades em que decisões de design e qualidade técnica impactem diretamente o produto.',
+      items: [
+        { title: 'Microsserviços com Java e Spring Boot', note: 'Já aplico no dia a dia, agora estudando de forma estruturada.' },
+        { title: 'Design patterns', note: 'Padrões de projeto e quando usá-los.' },
+        { title: 'System design', note: 'Boas práticas de desenho de sistemas escaláveis.' },
+        { title: 'Arquitetura de Software & Design de Sistemas Modernos', note: 'Certificação concluída na Udemy.' },
+      ],
+    },
+  },
+  en: {
+    ui: ui.en,
+    roles: ['Full Stack Developer', 'Java & Spring Boot', 'Java systems maintenance', 'AI solutions', 'TypeScript & Next.js'],
+    tagline:
+      'I build and maintain systems in Java and Spring Boot, create interfaces with TypeScript and Next.js, and develop AI solutions for web test automation, with a focus on quality and performance.',
+    about: [
+      "Developer at Vericode with a Bachelor's degree in Information Systems from Unoeste. I develop and maintain Java and Spring Boot projects, from APIs and orchestrators to internal tools, and I also build interfaces with Next.js and TypeScript.",
+      'Day to day I also work with Kubernetes: our environment and every change to it are applied through kubectl. My work includes AI solutions, such as web scenario automation with Playwright MCP at Jetdata, a capacity testing and certification platform built in partnership with B3. I also have a background in functional and non-functional testing, which shapes the quality and scalability of what I deliver. Outside of code, I enjoy games, reading, and streams.',
+    ],
+    workProjects: toProjects(work, 'en'),
+    personalProjects: toProjects(personal, 'en'),
+    experience: toJobs('en'),
+    education: education.en,
+    roadmap: {
+      intro:
+        'I am deepening my studies in software architecture with Java and Spring, looking for opportunities where design decisions and technical quality directly impact the product.',
+      items: [
+        { title: 'Microservices with Java and Spring Boot', note: 'Already applied day to day, now studying it in a structured way.' },
+        { title: 'Design patterns', note: 'Design patterns and when to use them.' },
+        { title: 'System design', note: 'Best practices for designing scalable systems.' },
+        { title: 'Software Architecture & Modern Systems Design', note: 'Certification completed on Udemy.' },
+      ],
+    },
+  },
 }

@@ -3,7 +3,8 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight, Mail, Moon, Sun } from 'lucide-react'
 import { CvMenu } from './CvMenu'
 import { SkillBadges } from './skills'
-import { education, experience, personalProjects, profile, roadmap, workProjects, type Project } from './data'
+import { links, name, type Project } from './data'
+import { useLang } from './i18n'
 
 const photos = import.meta.glob('./assets/photo.{png,webp,jpg}', { eager: true, import: 'default' })
 const photo = Object.values(photos)[0] as string | undefined
@@ -46,6 +47,15 @@ function useTypewriter(words: string[]) {
   return text
 }
 
+function RoleTypewriter({ words }: { words: string[] }) {
+  const role = useTypewriter(words)
+  return (
+    <>
+      {role}<span className="caret text-[var(--accent)]">▍</span>
+    </>
+  )
+}
+
 function Reveal({ children }: { children: ReactNode }) {
   return (
     <motion.div
@@ -71,6 +81,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function ProjectList({ items }: { items: Project[] }) {
+  const { t } = useLang()
   return (
     <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
       {items.map((p, i) => {
@@ -89,7 +100,7 @@ function ProjectList({ items }: { items: Project[] }) {
               </div>
               {p.contribution && (
                 <p className="mt-2 text-sm leading-relaxed">
-                  <span className="text-[var(--accent)]">Minha contribuição: </span>
+                  <span className="text-[var(--accent)]">{t.ui.contribution}</span>
                   {p.contribution}
                 </p>
               )}
@@ -117,9 +128,28 @@ function ProjectList({ items }: { items: Project[] }) {
   )
 }
 
+function LangToggle() {
+  const { lang, setLang, t } = useLang()
+  return (
+    <div role="group" aria-label={t.ui.toggleLang} className="mx-1 flex rounded-full border border-[var(--line)] p-0.5 text-[11px] font-medium">
+      {(['pt', 'en'] as const).map((l) => (
+        <button
+          key={l}
+          onClick={() => setLang(l)}
+          aria-pressed={lang === l}
+          className={`rounded-full px-2 py-1 uppercase transition ${lang === l ? 'bg-[var(--accent)] text-[#052e16]' : 'text-[var(--muted)] hover:text-[var(--fg)]'}`}
+        >
+          {l}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 const iconBtn = 'rounded-full p-2 text-[var(--muted)] transition hover:text-[var(--accent)]'
 
 export default function App() {
+  const { t } = useLang()
   const [dark, setDark] = useState(() => {
     try {
       const saved = localStorage.getItem('theme')
@@ -129,7 +159,6 @@ export default function App() {
     }
     return window.matchMedia('(prefers-color-scheme: dark)').matches
   })
-  const role = useTypewriter(profile.roles)
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark)
@@ -146,15 +175,16 @@ export default function App() {
         <nav className="mx-auto flex max-w-2xl items-center justify-between px-6 py-3 text-sm">
           <a href="#" className="font-semibold">Meiado<span className="text-[var(--accent)]">.</span></a>
           <div className="flex items-center gap-1 text-[var(--muted)]">
-            <a href="#sobre" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">Sobre</a>
-            <a href="#experiencia" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">Experiência</a>
-            <a href="#projetos" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">Projetos</a>
-            <a href="#roadmap" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">Roadmap</a>
-            <a href="#contato" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">Contato</a>
+            <a href="#about" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">{t.ui.nav.about}</a>
+            <a href="#experience" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">{t.ui.nav.experience}</a>
+            <a href="#projects" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">{t.ui.nav.projects}</a>
+            <a href="#roadmap" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">{t.ui.nav.roadmap}</a>
+            <a href="#contact" className="hidden px-2 transition hover:text-[var(--fg)] sm:block">{t.ui.nav.contact}</a>
             <div className="ml-1 hidden sm:block"><CvMenu label="CV" className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-3 py-1.5 text-xs transition hover:border-[var(--accent)] hover:text-[var(--accent)]" /></div>
-            <a href={profile.links.github} target="_blank" rel="noreferrer" aria-label="GitHub" className={iconBtn}><GithubIcon /></a>
-            <a href={profile.links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className={iconBtn}><LinkedinIcon /></a>
-            <button onClick={() => setDark(!dark)} aria-label="Alternar tema" className={iconBtn}>
+            <a href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub" className={iconBtn}><GithubIcon /></a>
+            <a href={links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className={iconBtn}><LinkedinIcon /></a>
+            <LangToggle />
+            <button onClick={() => setDark(!dark)} aria-label={t.ui.toggleTheme} className={iconBtn}>
               {dark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </div>
@@ -164,16 +194,16 @@ export default function App() {
       <main>
         <section className="mx-auto flex max-w-2xl flex-col-reverse items-start justify-between gap-8 px-6 pb-12 pt-24 sm:flex-row sm:items-center">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="mono text-sm text-[var(--accent)]">Olá, eu sou</p>
-            <h1 className="mt-1 text-4xl font-bold tracking-tight sm:text-5xl">{profile.name}</h1>
+            <p className="mono text-sm text-[var(--accent)]">{t.ui.greeting}</p>
+            <h1 className="mt-1 text-4xl font-bold tracking-tight sm:text-5xl">{name}</h1>
             <p className="mono mt-3 h-6 text-sm text-[var(--muted)]">
-              {role}<span className="caret text-[var(--accent)]">▍</span>
+              <RoleTypewriter key={t.roles[1]} words={t.roles} />
             </p>
-            <p className="mt-5 max-w-md leading-relaxed text-[var(--muted)]">{profile.tagline}</p>
-            <div className="mt-6 flex gap-3 text-sm">
-              <a href="#projetos" className="rounded-full bg-[var(--accent)] px-5 py-2 font-medium text-[#052e16] transition hover:opacity-80">Ver projetos</a>
-              <a href="#contato" className="rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]">Contato</a>
-              <CvMenu label="Baixar CV" className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]" />
+            <p className="mt-5 max-w-md leading-relaxed text-[var(--muted)]">{t.tagline}</p>
+            <div className="mt-6 flex flex-wrap gap-3 text-sm [&_a]:whitespace-nowrap [&_button]:whitespace-nowrap">
+              <a href="#projects" className="rounded-full bg-[var(--accent)] px-5 py-2 font-medium text-[#052e16] transition hover:opacity-80">{t.ui.seeProjects}</a>
+              <a href="#contact" className="rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]">{t.ui.contactBtn}</a>
+              <CvMenu label={t.ui.downloadCv} className="flex items-center gap-1.5 rounded-full border border-[var(--line)] px-5 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]" />
             </div>
           </motion.div>
           {photo && (
@@ -185,7 +215,7 @@ export default function App() {
             >
               <img
                 src={photo}
-                alt={profile.name}
+                alt={name}
                 className="h-full w-full object-cover object-top"
                 style={{
                   filter:
@@ -196,18 +226,18 @@ export default function App() {
           )}
         </section>
 
-        <Section id="sobre" title="Sobre">
+        <Section id="about" title={t.ui.nav.about}>
           <Reveal>
             <div className="space-y-4 leading-relaxed text-[var(--muted)]">
-              {profile.about.map((t) => <p key={t}>{t}</p>)}
+              {t.about.map((t) => <p key={t}>{t}</p>)}
             </div>
             <SkillBadges />
           </Reveal>
         </Section>
 
-        <Section id="experiencia" title="Experiência">
+        <Section id="experience" title={t.ui.nav.experience}>
           <div className="space-y-10">
-            {experience.map((e) => (
+            {t.experience.map((e) => (
               <Reveal key={e.role + e.company}>
                 <div>
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4">
@@ -224,7 +254,7 @@ export default function App() {
             ))}
           </div>
           <div className="mt-12 space-y-3 border-t border-[var(--line)] pt-8">
-            {education.map((ed) => (
+            {t.education.map((ed) => (
               <Reveal key={ed.title}>
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 text-sm">
                   <span>{ed.title} <span className="text-[var(--muted)]">· {ed.place}</span></span>
@@ -235,20 +265,20 @@ export default function App() {
           </div>
         </Section>
 
-        <Section id="projetos" title="Projetos">
+        <Section id="projects" title={t.ui.nav.projects}>
           <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">
-            Os projetos profissionais abaixo são código privado da empresa. Descrevo o que é público e a minha contribuição, sem mostrar código.
+            {t.ui.workNote}
           </p>
-          <ProjectList items={workProjects} />
-          <h3 className="mb-4 mt-14 text-sm font-medium text-[var(--muted)]">Faculdade e pessoais</h3>
-          <ProjectList items={personalProjects} />
+          <ProjectList items={t.workProjects} />
+          <h3 className="mb-4 mt-14 text-sm font-medium text-[var(--muted)]">{t.ui.personalTitle}</h3>
+          <ProjectList items={t.personalProjects} />
         </Section>
 
-        <Section id="roadmap" title="Roadmap">
+        <Section id="roadmap" title={t.ui.nav.roadmap}>
           <Reveal>
-            <p className="leading-relaxed text-[var(--muted)]">{roadmap.intro}</p>
+            <p className="leading-relaxed text-[var(--muted)]">{t.roadmap.intro}</p>
             <ul className="mt-6 space-y-4">
-              {roadmap.items.map((r) => (
+              {t.roadmap.items.map((r) => (
                 <li key={r.title} className="flex gap-3 text-sm">
                   <span className="mono text-[var(--accent)]">→</span>
                   <span>
@@ -261,10 +291,10 @@ export default function App() {
           </Reveal>
         </Section>
 
-        <Section id="contato" title="Contato">
+        <Section id="contact" title={t.ui.nav.contact}>
           <Reveal>
-            <p className="text-[var(--muted)]">Aberto a conversas sobre projetos e oportunidades.</p>
-            <a href={profile.links.email} className="mt-5 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-medium text-[#052e16] transition hover:opacity-80">
+            <p className="text-[var(--muted)]">{t.ui.contactLine}</p>
+            <a href={links.email} className="mt-5 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-medium text-[#052e16] transition hover:opacity-80">
               <Mail size={16} /> gabrielmeiado20@gmail.com
             </a>
           </Reveal>
@@ -272,7 +302,7 @@ export default function App() {
       </main>
 
       <footer className="border-t border-[var(--line)] py-8 text-center text-sm text-[var(--muted)]">
-        © {new Date().getFullYear()} Gabriel Meiado
+        © {new Date().getFullYear()} {name}
       </footer>
     </>
   )
